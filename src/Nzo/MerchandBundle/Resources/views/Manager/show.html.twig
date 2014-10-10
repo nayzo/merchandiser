@@ -6,50 +6,71 @@
 </head>
 
 <body style="text-align:center;">
-<div></div><div></div>
-    <div>
-        <h1>Manager Show</h1>
-        <div></div>
-        <hr>
-        <div></div>
-        <div id="showid">
-            <table border="1" style="margin-left:auto; margin-right:auto;">
-                <th>Num</th>
-                <th>seller name</th>
-                <th>buyer name</th>
-                <th>price</th>
-                <th>amount</th>
+<div></div>
+<div></div>
+<div>
+    <h1>Manager Show</h1>
 
-                {% for node in content %}
-                    {% for val in node %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ val.sellername }}</td>
-                            <td>{{ val.buyername }}</td>
-                            <td>{{ val.price }}</td>
-                            <td>{{ val.amount }}</td>
-                        </tr>
-                    {% endfor %}
-                {% endfor %}
+    <div></div>
+    <hr>
+    <div></div>
+    <div id="showid">
+        <table border="1" style="margin-left:auto; margin-right:auto;">
+            <th>Num</th>
+            <th>seller name</th>
+            <th>buyer name</th>
+            <th>price</th>
+            <th>amount</th>
 
-            </table>
-        </div>
+            {% for node in content %}
 
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ node.sellername }}</td>
+                    <td>{{ node.buyername }}</td>
+                    <td>{{ node.price }}</td>
+                    <td>{{ node.amount }}</td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
     </div>
 
-<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
-<script src="{{ asset('bundles/nzomerchand/js/stomp.js') }}"></script>
-<script>
+</div>
 
-    var ws = new SockJS('http://127.0.0.1:15674/stomp');
-    var client = Stomp.over(ws);
-    var on_connect = function() {
-        console.log('connected');
-    };
-    var on_error =  function() {
-        console.log('error');
-    };
-    client.connect('guest', 'guest', on_connect, on_error, '/');
+<script>
+    setInterval(function () {
+        $.ajax({
+            url: '{{ path('nzo_merchand_show') }}',
+            type: "GET",
+            dataType: "json",
+            success: function (root) {
+                var text = '<table border="1" style="margin-left:auto; margin-right:auto;">' +
+                        '<th>Num</th>' +
+                        '<th>seller name</th>' +
+                        '<th>buyer name</th>' +
+                        '<th>price</th>' +
+                        '<th>amount</th>';
+
+                for (i = 0; i < root.length; i++) {
+                    text += '<tr>';
+                    text += '<td>' + parseInt(i + 1) + '</td>';
+                    text += '<td>' + root[i].sellername + '</td>';
+                    text += '<td>' + root[i].buyername + '</td>';
+                    text += '<td>' + root[i].price + '</td>';
+                    text += '<td>' + root[i].amount + '</td>';
+                    text += '</tr>';
+                }
+                text += '</table>';
+                $('#showid').html(text);
+            },
+
+            error: function () {
+            }
+        });
+
+    }, 4000);
 </script>
 </body>
 

@@ -2,9 +2,6 @@
 <root>
 
 
-    
-    
-    
     <node>
         <sellername>zzz</sellername>
         <buyername>zz</buyername>
@@ -47,4 +44,22 @@
         <price>eee</price>
         <amount>eee</amount>
     </node>
-<node><sellername>vvv</sellername><buyername>ddd</buyername><price>ddd</price><amount>dddd</amount></node><node><sellername>wwww</sellername><buyername>www</buyername><price>www</price><amount>www</amount></node><node><sellername>fffff</sellername><buyername>fff</buyername><price>ffff</price><amount>ffffff</amount></node></root>
+    <node>
+        <sellername>vvv</sellername>
+        <buyername>ddd</buyername>
+        <price>ddd</price>
+        <amount>dddd</amount>
+    </node>
+    <node>
+        <sellername>wwww</sellername>
+        <buyername>www</buyername>
+        <price>www</price>
+        <amount>www</amount>
+    </node>
+    <node>
+        <sellername>fffff</sellername>
+        <buyername>fff</buyername>
+        <price>ffff</price>
+        <amount>ffffff</amount>
+    </node>
+</root>

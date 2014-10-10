@@ -18,7 +18,6 @@ class ManagerController extends Controller
                 'amount' => $request->request->get('amount'),
             );
 
-            // Producer:
             $Array = serialize($Array);
             $this->get('old_sound_rabbit_mq.manager_insert_producer')->publish($Array);
 
@@ -29,26 +28,21 @@ class ManagerController extends Controller
     public function showAction(Request $request)
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__.'/../Resources/views/Manager')->name('file.xml');
+        $finder->files()->in(__DIR__ . '/../Resources/views/Manager')->name('file.xml');
         foreach ($finder as $file) {
             $val = $file->getContents();
         }
 
         $xml = simplexml_load_string($val);
         $json = json_encode($xml);
-        $array = json_decode($json,TRUE);
-        $array =  array_slice($array['node'], -5);
+        $array = json_decode($json, TRUE);
+        $array = array_slice($array['node'], -5);
 
-        if($request->isXmlHttpRequest()) {
-            return new Response(json_encode($array), 200, array('Content-Type'=>'application/json'));
+        if ($request->isXmlHttpRequest()) {
+            return new Response(json_encode($array), 200, array('Content-Type' => 'application/json'));
         }
 
-
-        return $this->render('NzoMerchandBundle:Manager:showAjax.html.twig', array('content' => $array ));
+        return $this->render('NzoMerchandBundle:Manager:show.html.twig', array('content' => $array));
     }
 
-    public function formerXML()
-    {
-
-    }
 }
