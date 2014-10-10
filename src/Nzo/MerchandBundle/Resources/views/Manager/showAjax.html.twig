@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Show</title>
+    <script src="{{ asset('bundles/nzomerchand/js/jquery.min.js') }}"></script>
+</head>
+
+<body style="text-align:center;">
+<div></div><div></div>
+    <div>
+        <h1>Manager Show</h1>
+        <div></div>
+        <hr>
+        <div></div>
+        <div id="showid">
+            <table border="1" style="margin-left:auto; margin-right:auto;">
+                <th>Num</th>
+                <th>seller name</th>
+                <th>buyer name</th>
+                <th>price</th>
+                <th>amount</th>
+
+                {% for node in content %}
+
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ node.sellername }}</td>
+                            <td>{{ node.buyername }}</td>
+                            <td>{{ node.price }}</td>
+                            <td>{{ node.amount }}</td>
+                        </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+
+    </div>
+
+<script>
+    setInterval(function () {
+        $.ajax({
+            url: '{{ path('nzo_merchand_show') }}',
+            type: "GET",
+            dataType: "json",
+            success: function (root) {
+                //root = root.node;
+                var text = '<table border="1" style="margin-left:auto; margin-right:auto;">'+
+                        '<th>Num</th>' +
+                        '<th>seller name</th>' +
+                        '<th>buyer name</th>' +
+                        '<th>price</th>' +
+                        '<th>amount</th>';
+
+                for(i=0; i < root.length; i++) {
+                    text += '<tr>';
+                    text += '<td>'+ parseInt(i+1) +'</td>';
+                    text += '<td>'+ root[i].sellername +'</td>';
+                    text += '<td>'+ root[i].buyername +'</td>';
+                    text += '<td>'+ root[i].price +'</td>';
+                    text += '<td>'+ root[i].amount +'</td>';
+                    text += '</tr>';
+                }
+                text += '</table>';
+                $('#showid').html(text);
+            },
+
+            error: function () {
+            }
+        });
+
+    }, 4000);
+</script>
+</body>
+
+</html>

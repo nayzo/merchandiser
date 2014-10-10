@@ -1,0 +1,4 @@
+nzo_merchand:
+    resource: "@NzoMerchandBundle/Resources/config/routing.yml"
+    prefix:   /
+

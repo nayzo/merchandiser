@@ -1,0 +1,7 @@
+nzo_merchand_create:
+    path:     /create/
+    defaults: { _controller: NzoMerchandBundle:Manager:create }
+
+nzo_merchand_show:
+    path:     /show/
+    defaults: { _controller: NzoMerchandBundle:Manager:show }

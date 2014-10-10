@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Show</title>
+    <script src="{{ asset('bundles/nzomerchand/js/jquery.min.js') }}"></script>
+</head>
+
+<body style="text-align:center;">
+<div></div><div></div>
+    <div>
+        <h1>Manager Show</h1>
+        <div></div>
+        <hr>
+        <div></div>
+        <div id="showid">
+            <table border="1" style="margin-left:auto; margin-right:auto;">
+                <th>Num</th>
+                <th>seller name</th>
+                <th>buyer name</th>
+                <th>price</th>
+                <th>amount</th>
+
+                {% for node in content %}
+                    {% for val in node %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ val.sellername }}</td>
+                            <td>{{ val.buyername }}</td>
+                            <td>{{ val.price }}</td>
+                            <td>{{ val.amount }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+
+            </table>
+        </div>
+
+    </div>
+
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script src="{{ asset('bundles/nzomerchand/js/stomp.js') }}"></script>
+<script>
+
+    var ws = new SockJS('http://127.0.0.1:15674/stomp');
+    var client = Stomp.over(ws);
+    var on_connect = function() {
+        console.log('connected');
+    };
+    var on_error =  function() {
+        console.log('error');
+    };
+    client.connect('guest', 'guest', on_connect, on_error, '/');
+</script>
+</body>
+
+</html>
