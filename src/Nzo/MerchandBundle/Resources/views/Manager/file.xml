@@ -2,18 +2,8 @@
 <root>
 
 
-    <node>
-        <sellername>zzz</sellername>
-        <buyername>zz</buyername>
-        <price>zz</price>
-        <amount>zzz</amount>
-    </node>
-    <node>
-        <sellername>vcvxc</sellername>
-        <buyername>vxcvxcv</buyername>
-        <price>vxcvx</price>
-        <amount>vxcv</amount>
-    </node>
+    
+    
     <node>
         <sellername>vxcvxcv</sellername>
         <buyername>vvv</buyername>
@@ -62,4 +52,4 @@
         <price>ffff</price>
         <amount>ffffff</amount>
     </node>
-</root>
+<node><sellername>dfsdf</sellername><buyername>sdfsdf</buyername><price>ffsdf</price><amount>fsdfsdf</amount></node><node><sellername>zzz</sellername><buyername>zzz</buyername><price>zz</price><amount>zzzz</amount></node></root>
