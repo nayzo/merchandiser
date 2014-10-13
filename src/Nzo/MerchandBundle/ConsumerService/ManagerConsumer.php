@@ -7,11 +7,17 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class ManagerConsumer implements ConsumerInterface
 {
+    private $path;
+
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
 
     public function execute(AMQPMessage $msg)
     {
         $Array = unserialize($msg->body);
-        $file = __DIR__ . '/../Resources/views/Manager/file.xml';
+        $file = $this->path . '/Resources/views/Manager/file.xml';
 
         $xml = simplexml_load_file($file);
         if ($xml->count() === 10) {

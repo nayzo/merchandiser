@@ -1,6 +1,0 @@
-
-services:
-
-    manager_insert_service:
-        class: Nzo\MerchandBundle\ConsumerService\ManagerConsumer
-        arguments: []
