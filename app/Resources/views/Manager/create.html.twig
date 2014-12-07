@@ -5,18 +5,31 @@
 </head>
 
 <body id="index">
+
 <div></div><div></div>
     <div style="text-align: center">
-        <h1>Manager Create</h1>
+        <h1>{{ 'Manager Create Nzo!' | trans({'%name%': 'Nzo'}) }}</h1>
+
+        {#
+            {{ 'maChaîne'|trans({'%name%': name}, 'domaine', locale) }}
+        #}
+
+
+        {#
+            {% trans with {'%name%': name} from 'domaine' into locale %}
+                hello
+            {% endtrans %}
+        #}
         <div></div>
+        <a href="{{ path('nzo_merchand_show') }}">Show</a>
         <hr>
         <h3>Form:</h3>
         <div></div>
         <form name="form" method="post">
-            seller name: <input type="text" name="sellername"> <br>
-            buyer name : <input type="text" name="buyername"> <br>
-            price: <input type="text" name="price"> <br>
-            amount: <input type="text" name="amount"> <br>
+            Seller name: <input type="text" name="sellername"> <br>
+            Buyer name : <input type="text" name="buyername"> <br>
+            Price: <input type="text" name="price"> <br>
+            Amount: <input type="text" name="amount"> <br>
 
             <input type="submit" value="Submit">
         </form>

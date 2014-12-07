@@ -8,11 +8,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Finder\Finder;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+/**
+ * @Route("/{_locale}",
+ * requirements={"_locale" = "fr|en"},
+ * defaults={"_locale" = "en"} )
+ */
 class ManagerController extends Controller
 {
     /**
      * @Route("/create/", name="nzo_merchand_create")
+     * @Method({"GET", "POST"})
      */
     public function createAction(Request $request)
     {
@@ -27,16 +34,18 @@ class ManagerController extends Controller
             $this->get('old_sound_rabbit_mq.manager_insert_producer')->publish($Array);
 
         }
-        return $this->render('Manager/create.html.twig');
+
+        return $this->render(':Manager:create.html.twig');
     }
 
     /**
      * @Route("/show/", name="nzo_merchand_show")
+     * @Method({"GET", "POST"})
      */
     public function showAction(Request $request)
     {
-        //$path = __DIR__ . '/../Resources/views/Manager';
         $path = $this->get('kernel')->getRootDir() . '/Resources/views/Manager';
+        //$path = __DIR__ . '/../Resources/views/Manager';
 
         $finder = new Finder();
         $finder->files()->in($path)->name('file.xml');
@@ -53,7 +62,7 @@ class ManagerController extends Controller
             return new Response(json_encode($array), 200, array('Content-Type' => 'application/json'));
         }
 
-        return $this->render('Manager/show.html.twig', array('content' => $array));
+        return $this->render(':Manager:show.html.twig', array('content' => $array));
     }
 
 }

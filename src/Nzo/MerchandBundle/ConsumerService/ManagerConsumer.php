@@ -18,6 +18,7 @@ class ManagerConsumer implements ConsumerInterface
     {
         $Array = unserialize($msg->body);
         $file = $this->path . '/Resources/views/Manager/file.xml';
+        //$file = __DIR__ . '/../Resources/views/Manager/file.xml';
 
         $xml = simplexml_load_file($file);
         if ($xml->count() === 10) {
